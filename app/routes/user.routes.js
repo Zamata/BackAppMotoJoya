@@ -1,4 +1,48 @@
+// Importa Express para crear rutas
 import express from "express";
+
+// Importa los controladores que manejan las respuestas según el rol del usuario
+import {
+  allAccess,        // Respuesta para rutas públicas
+
+  createLicense, updateLicense, deleteLicense, getLicenseById //Respuestas  
+} from "../controllers/user.controller.js";
+
+// Importa middlewares de autenticación y autorización
+import {
+  verifyToken,      // Verifica que el usuario esté autenticado (token válido)
+
+} from "../middlewares/authJwt.js";
+
+
+// Crea una instancia de router para definir las rutas protegidas por roles
+const router = express.Router();
+
+/*
+// Ruta pública: no requiere autenticación
+router.get("/all", allAccess);
+
+// Ruta solo para usuarios autenticados (requiere token JWT válido)
+router.get("/user", [verifyToken], userBoard);
+
+// Ruta solo para moderadores (requiere token + rol moderador)
+router.get("/mod", [verifyToken, isModerator], moderatorBoard);
+
+// Ruta solo para administradores (requiere token + rol admin)
+router.get("/admin", [verifyToken, isAdmin], adminBoard);
+*/
+
+//CRUD
+// CRUD abierto al público (sin token)
+router.get("/all", allAccess);               // Listar licencias
+router.get("/all/:id", getLicenseById);      // Por ID
+router.post("/all", createLicense);          // Crear licencia
+router.put("/all/:id", updateLicense);       // Actualizar licencia
+router.delete("/all/:id", deleteLicense);    // Eliminar licencia
+
+// Exporta el router para que pueda ser usado en app.js o server.js
+export default router;
+/*import express from "express";
 
 import {
   allAccess,     // Respuesta para rutas públicas
@@ -24,4 +68,4 @@ router.get("/mod", [verifyToken, isModerator], moderatorBoard);
 
 router.get("/admin", [verifyToken, isAdmin], adminBoard);
 
-export default router;
+export default router;*/
