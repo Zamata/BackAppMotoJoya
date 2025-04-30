@@ -15,7 +15,7 @@ import authRoutes from "./app/routes/auth.routes.js";
 // Importa las rutas protegidas por roles de usuario
 import userRoutes from "./app/routes/user.routes.js";
 
-import licenseRoutes from "./app/routes/license.routes.js";
+//import licenseRoutes from "./app/routes/license.routes.js"; EMPLEO A FUTURO
 
 // Crea una instancia de la aplicación Express
 const app = express();
@@ -25,7 +25,7 @@ const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:8080"]
 };
 
-app.use("/api/licenses", licenseRoutes);
+//app.use("/api/licenses", licenseRoutes);
 
 // Aplica el middleware de CORS a la aplicación
 app.use(cors(corsOptions));
@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 
 // Define la ruta base para pruebas de acceso según el rol del usuario: /api/test/*
-app.use("/api/test", userRoutes);
+app.use("/api/licenses", userRoutes);
 
 // Define el puerto en el que se ejecutará el servidor. Usa 3000 por defecto o lo que se indique en el entorno
 const PORT = process.env.PORT || 3000;
