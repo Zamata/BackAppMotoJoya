@@ -22,7 +22,11 @@ const app = express();
 
 // Configura las opciones de CORS para permitir acceso desde el frontend en el puerto 8080
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:8080"]
+  origin: [
+    "http://localhost:5173",           // para desarrollo local
+    "https://frontreactmotojoya.onrender.com"  // para producción en Render
+  ],
+  credentials: true // si usas cookies o autenticación
 };
 
 //app.use("/api/licenses", licenseRoutes);
